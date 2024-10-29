@@ -1,16 +1,12 @@
-name: Deploy frontend
+name: Deploy main
 
 on:
   push:
-    branches:
-      - dev
-  pull_request:
     branches:
       - main
 
 permissions:
   contents: read
-  pages: write
   id-token: write
 
 jobs:
@@ -19,7 +15,7 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v4
-      - name: Set up node
+      - name: Set up Node
         uses: actions/setup-node@v3
         with:
           node-version: '16'
@@ -32,19 +28,11 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-secret-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-north-1
-      - name: Deploy to test environment
-        if: github.ref == 'refs/heads/dev'
+      - name: Deploy
         run: |
           aws amplify start-job \
             --app-id d26q4jash9pddy \
-            --branch-name dev \
-            --job-type RELEASE
-      - name: Deploy to production
-        if: github.event_name == 'pull_request' && github.base_ref == 'main'
-        run: |
-          aws amplify start-job \
-            --app-id d26q4jash9pddy \
-            --branch-name main
+            --branch-name main \
             --job-type RELEASE
