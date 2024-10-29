@@ -1,0 +1,52 @@
+
+org: sparrro
+
+service: backend
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  environment:
+    REGION: "eu-north-1"
+  iam:
+    role:
+
+build:
+  esbuild:
+    minify: true
+
+package:
+  individually: true
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - httpApi:
+          path: /
+          method: get
+
+resources:
+  Resources:
+    UsersTable:
+      Type: AWS:DynamoDB::Table
+      Properties:
+        TableName: Users
+        AttributeDefinitions:
+          - AttributeName: "id"
+            AttributeType: "S"
+        KeySchema:
+          - AttributeName: "id"
+            KeyType: "HASH"
+        BillingMode: PAY_PER_REQUEST
+    MeetupsTable:
+      Type: AWS:DynamoDB::Table
+      Properties:
+        TableName: Meetups
+        AttributeDefinitions:
+          - AttributeName: "id"
+            AttributeType: "S"
+        KeySchema:
+          - AttributeName: "id"
+            KeyType: "HASH"
+        BillingMode: PAY_PER_REQUEST
