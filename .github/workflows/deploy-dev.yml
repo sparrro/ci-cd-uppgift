@@ -23,16 +23,15 @@ jobs:
         with:
           node-version: '20'
       - name: Install and build
-        working-directory: ./frontend
+        working-directory: frontend
         run: |
           npm install
           npm run build
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: pages-artifact
-          path: ./frontend/dist
       - name: Deploy
-        uses: actions/deploy-pages@v1
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          artifact_name: pages-artifact
+          github_token: ${{ secrets.TOKEN }}
+          publish_dir: frontend/dist
+          publish_branch: dev
+          user_name: sparrro
+          user_email: hrothi.wulfaz@gmail.com
