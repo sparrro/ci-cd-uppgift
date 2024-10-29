@@ -19,13 +19,18 @@ jobs:
       - name: Set up node
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '20'
       - name: Install and build
         working-directory: ./frontend
         run: |
           npm install
           npm run build
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: pages-artifact
+          path: ./frontend/dist
       - name: Deploy
         uses: actions/deploy-pages@v1
         with:
-          folder: ./frontend/dist
+          artifact_name: pages-artifact
