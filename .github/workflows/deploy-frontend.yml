@@ -1,0 +1,50 @@
+name: Deploy frontend
+
+on:
+  push:
+    branches:
+      - dev
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  content: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Set up node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'
+      - name: Install and build
+        working-directory: ./frontend
+        run: |
+          npm install
+          npm run build
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-north-1
+      - name: Deploy to test environment
+        if: github.ref == 'refs/heads/dev'
+        run: |
+          aws amplify start-job \
+            --app-id d26q4jash9pddy \
+            --branch-name dev \
+            --job-type RELEASE
+      - name: Deploy to production
+        if: github.event_name == 'pull_request' && github.base_ref == 'main'
+        run: |
+          aws amplify start-job \
+            --app-id d26q4jash9pddy \
+            --branch-name main
+            --job-type RELEASE
