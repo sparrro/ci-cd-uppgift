@@ -22,7 +22,7 @@ jobs:
       - name: Set up node
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: '16'
       - name: Install and build
         working-directory: ./frontend
         run: |
