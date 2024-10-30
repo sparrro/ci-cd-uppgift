@@ -2,6 +2,7 @@ const { db } = require("./../../database/index");
 const { sendResponse, sendError } = require("../../responses/index");
 const { authenticate } = require("../../middlewares");
 const { QueryCommand } = require("@aws-sdk/lib-dynamodb");
+const middy = require("@middy/core");
 
 getAccountHandler = async (event) => {
 

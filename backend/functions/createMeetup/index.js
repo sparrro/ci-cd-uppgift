@@ -3,7 +3,7 @@ const { sendResponse, sendError } = require("../../responses/index");
 const { PutCommand } = require("@aws-sdk/lib-dynamodb");
 const { v4: uuidv4 } = require("uuid");
 const { authenticate } = require("../../middlewares");
-const { middy } = require("@middy/core");
+const middy = require("@middy/core");
 
 createMeetupHandler = async (event) => {
     
