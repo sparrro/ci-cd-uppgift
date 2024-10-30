@@ -1,0 +1,55 @@
+Användaren kan se en "Registrera" knapp på startsidan.
+Användaren kan skapa ett konto genom att ange nödvändig information (t.ex. e-post, lösenord).
+Användaren får feedback om registreringen var framgångsrik.
+
+POST skapa konto
+
+
+Användaren kan logga in med sitt e-post och lösenord.
+Användaren får feedback om inloggningen var framgångsrik.
+
+POST logga in
+
+
+Användaren kan se en lista över kommande meetups på startsidan eller på en särskild sida.
+Varje meetup i listan innehåller detaljer som tid, plats och värd.
+Användaren kan klicka på en meetup för att se mer information.
+
+GET alla meetup
+GET specifikt meetup
+
+
+Användaren kan se en sökruta på sidan med meetups.
+Användaren kan skriva in nyckelord i sökrutan och se en lista över matchande meetups.
+
+
+Användaren kan se en "Anmäl dig" knapp på varje meetups detaljsida.
+Användaren kan klicka på "Anmäl dig" knappen för att anmäla sig till en meetup.
+Om meetupen är full, visas ett meddelande som informerar användaren om detta.
+
+PUT lägg till anmälan till meetup
+
+
+Efter en meetup, kan användaren se en "Betygsätt och recensera" knapp på meetupens detaljsida.
+Användaren kan klicka på knappen, skriva en recension och ge en betygsättning.
+Användarens recension och betyg visas på meetupens detaljsida för andra användare att se. (VG)
+
+
+Användaren kan se en "Min Profil" knapp eller länk någonstans på sidan.
+Användaren kan klicka på "Min Profil" för att se en lista över sina anmälda och tidigare meetups.
+Användaren kan klicka på varje meetup i listan för att se mer information.
+
+
+Användaren kan se en beskrivning av meetup:en.
+Användaen kan se antalet platser samt antalet anmälda.
+Användaren kan klicka på en knapp för att anmäla sig.
+
+
+Användaren kan se filteralternativ på sidan med meetups.
+Användaren kan tillämpa filter baserat på datum, plats eller kategori och se en uppdaterad lista över meetups. (VG)
+
+
+Det finns en avregistrera knapp på den detaljerade sidan för en meetup.
+Användaren blir avregistrerad från meetup och antalet anmälda uppdateras.
+
+PUT ta bort anmälan från meetup

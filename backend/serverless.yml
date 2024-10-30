@@ -8,6 +8,7 @@ provider:
   runtime: nodejs20.x
   environment:
     REGION: "eu-north-1"
+  region: eu-north-1
   iam:
     role: ${ env:AWS_ROLE }
 
@@ -19,12 +20,60 @@ package:
   individually: true
 
 functions:
-  hello:
-    handler: handler.hello
+  createAccount:
+    handler: functions/createAccount/index.handler
     events:
       - httpApi:
-          path: /
+          path: /account/signup
+          method: post
+  logIn:
+    handler: functions/logIn/index.handler
+    events:
+      - httpApi:
+          path: /account/login
+          method: post
+  getAccount:
+    handler: functions/getAccount/index.handler
+    events:
+      - httpApi:
+          path: /account/{id}
           method: get
+  createMeetup:
+    handler: functions/createMeetup/index.handler
+    events:
+      - httpApi:
+          path: /meetup
+          method: post
+  deleteMeetup:
+    handler: functions/deleteMeetup/index.handler
+    events:
+      - httpApi:
+          path: /meetup/{id}
+          method: delete
+  getAllMeetups:
+    handler: functions/getAllMeetups/index.handler
+    events:
+      - httpApi:
+          path: /meetup
+          method: get
+  getMeetup:
+    handler: functions/getMeetup/index.handler
+    events:
+      - httpApi:
+          path: /meetup/{id}
+          method: get
+  joinMeetup:
+    handler: functions/joinMeetup/index.handler
+    events:
+      - httpApi:
+          path: /meetup/{id}/join
+          method: put
+  unjoinMeetup:
+    handler: functions/unjoinMeetup.index.handler
+    events:
+      - httpApi:
+          path: /meetup/{id}/unjoin
+  
 
 resources:
   Resources:
