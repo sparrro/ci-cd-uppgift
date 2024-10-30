@@ -73,6 +73,7 @@ functions:
     events:
       - httpApi:
           path: /meetup/{id}/unjoin
+          method: put
   
 
 resources:
