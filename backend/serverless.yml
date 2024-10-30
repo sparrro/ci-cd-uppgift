@@ -69,7 +69,7 @@ functions:
           path: /meetup/{id}/join
           method: put
   unjoinMeetup:
-    handler: functions/unjoinMeetup.index.handler
+    handler: functions/unjoinMeetup/index.handler
     events:
       - httpApi:
           path: /meetup/{id}/unjoin
