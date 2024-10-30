@@ -2,8 +2,9 @@ const { db } = require("./../../database/index");
 const { sendResponse, sendError } = require("../../responses/index");
 const { PutCommand } = require("@aws-sdk/lib-dynamodb");
 const { v4: uuidv4 } = require("uuid");
+const { authenticate } = require("../../middlewares");
 
-exports.handler = async (event) => {
+createMeetupHandler = async (event) => {
     
     const {name, desc, time, place} = JSON.parse(event.body);
     if (!name || !desc || !time || !place) return sendError(400, "Meetup name, description, time and place required");
@@ -35,3 +36,5 @@ exports.handler = async (event) => {
     }
 
 }
+
+exports.handler = middy(createMeetupHandler).use(authenticate);
