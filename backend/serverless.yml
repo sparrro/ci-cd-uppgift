@@ -85,9 +85,26 @@ resources:
         AttributeDefinitions:
           - AttributeName: "id"
             AttributeType: "S"
+          - AttributeName: "username"
+            AttributeType: "S"
+          - AttributeName: "email"
+            AttributeType: "S"
         KeySchema:
           - AttributeName: "id"
             KeyType: "HASH"
+        GlobalSecondaryIndexes:
+          - Indexname: usernameIndex
+            KeySchema:
+              - AttributeName: username
+                KeyType: HASH
+            Projection:
+              ProjectionType: KEYS_ONLY
+          - IndexName: emailIndex
+            KeySchema:
+              - AttributeName: email
+                KeyType: HASH
+            Projection:
+              ProjectionType: KEYS_ONLY
         BillingMode: PAY_PER_REQUEST
     MeetupsTable:
       Type: AWS::DynamoDB::Table
