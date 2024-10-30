@@ -22,7 +22,6 @@ exports.handler = async (event) => {
         const result = await db.send(queryCommand);
         if (result.Items.length===0) return sendError(400, "Incorrect email or password");
         const user = result.Items[0];
-        return sendResponse(200, user)
 
         const passwordMatches = await checkPassword(password, user.password);
         if (!passwordMatches) return sendError(400, "Incorrect email or password");

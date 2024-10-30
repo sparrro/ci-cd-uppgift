@@ -105,7 +105,9 @@ resources:
               - AttributeName: email
                 KeyType: HASH
             Projection:
-              ProjectionType: KEYS_ONLY
+              ProjectionType: INCLUDE
+              NonKeyAttributes:
+                - password
         BillingMode: PAY_PER_REQUEST
     MeetupsTable:
       Type: AWS::DynamoDB::Table
