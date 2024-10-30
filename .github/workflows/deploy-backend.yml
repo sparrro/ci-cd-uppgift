@@ -29,4 +29,6 @@ jobs:
         run: echo "AWS credentials configured"
       - name: Deploy
         working-directory: ./backend
+        env:
+          AWS_ROLE: ${{ secrets.AWS_ROLE }}
         run: npx serverless deploy --stage dev

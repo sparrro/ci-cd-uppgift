@@ -9,7 +9,7 @@ provider:
   environment:
     REGION: "eu-north-1"
   iam:
-    role:
+    role: ${ env:AWS_ROLE }
 
 build:
   esbuild:
@@ -29,7 +29,7 @@ functions:
 resources:
   Resources:
     UsersTable:
-      Type: AWS:DynamoDB::Table
+      Type: AWS::DynamoDB::Table
       Properties:
         TableName: Users
         AttributeDefinitions:
@@ -40,7 +40,7 @@ resources:
             KeyType: "HASH"
         BillingMode: PAY_PER_REQUEST
     MeetupsTable:
-      Type: AWS:DynamoDB::Table
+      Type: AWS::DynamoDB::Table
       Properties:
         TableName: Meetups
         AttributeDefinitions:
