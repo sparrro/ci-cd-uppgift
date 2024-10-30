@@ -2,7 +2,7 @@ Användaren kan se en "Registrera" knapp på startsidan.
 Användaren kan skapa ett konto genom att ange nödvändig information (t.ex. e-post, lösenord).
 Användaren får feedback om registreringen var framgångsrik.
 
-POST skapa konto + 
+POST skapa konto +  
 
 
 Användaren kan logga in med sitt e-post och lösenord.
