@@ -19,7 +19,7 @@ getAccountHandler = async (event) => {
         });
         const result = await db.send(queryCommand);
 
-        return sendResponse(200, result);
+        return sendResponse(200, result[0]);
 
     } catch (error) {
         console.error(error);
