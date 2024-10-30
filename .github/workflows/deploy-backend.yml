@@ -31,4 +31,5 @@ jobs:
         working-directory: ./backend
         env:
           AWS_ROLE: ${{ secrets.AWS_ROLE }}
+          SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
         run: npx serverless deploy --stage dev
