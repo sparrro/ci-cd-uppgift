@@ -37,7 +37,7 @@ functions:
     handler: functions/getAccount/index.handler
     events:
       - httpApi:
-          path: /account/{id}
+          path: /account
           method: get
   createMeetup:
     handler: functions/createMeetup/index.handler
