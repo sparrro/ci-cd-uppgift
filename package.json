@@ -17,6 +17,7 @@
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.682.0",
     "@aws-sdk/lib-dynamodb": "^3.682.0",
+    "@middy/core": "^5.5.1",
     "bcryptjs": "^2.4.3",
     "email-validator": "^2.0.4",
     "jsonwebtoken": "^9.0.2",
