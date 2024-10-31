@@ -1,0 +1,11 @@
+.left-side {
+    min-height: 400px;
+    width: 45%;
+    border-radius: 5px;
+    background-color: rgb(132, 156, 121);
+    display: grid;
+    grid-gap: 10px;
+    padding: 10px;
+    grid-template-columns: auto auto;
+}
+
