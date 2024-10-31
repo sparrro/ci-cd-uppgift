@@ -31,7 +31,7 @@ exports.handler = async (event) => {
                 ":email": email,
             },
         });
-        const emailResult = await db.send(usernameQueryComm);
+        const emailResult = await db.send(emailQueryComm);
 
         if (usernameResult.Items.length>0 || emailResult.Items.length>0) return sendError(409, "Email or username already in use");
 
