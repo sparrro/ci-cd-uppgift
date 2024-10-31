@@ -6,6 +6,8 @@ service: backend
 provider:
   name: aws
   runtime: nodejs20.x
+  httpApi:
+    cors: true
   environment:
     REGION: "eu-north-1"
     JWT_SECRET: ${ env:JWT_SECRET }
@@ -27,63 +29,54 @@ functions:
       - httpApi:
           path: /account/signup
           method: post
-          cors: true
   logIn:
     handler: functions/logIn/index.handler
     events:
       - httpApi:
           path: /account/login
           method: post
-          cors: true
   getAccount:
     handler: functions/getAccount/index.handler
     events:
       - httpApi:
           path: /account
           method: get
-          cors: true
   createMeetup:
     handler: functions/createMeetup/index.handler
     events:
       - httpApi:
           path: /meetup
           method: post
-          cors: true
   deleteMeetup:
     handler: functions/deleteMeetup/index.handler
     events:
       - httpApi:
           path: /meetup/{id}
           method: delete
-          cors: true
   getAllMeetups:
     handler: functions/getAllMeetups/index.handler
     events:
       - httpApi:
           path: /meetup
           method: get
-          cors: true
   getMeetup:
     handler: functions/getMeetup/index.handler
     events:
       - httpApi:
           path: /meetup/{id}
           method: get
-          cors: true
   joinMeetup:
     handler: functions/joinMeetup/index.handler
     events:
       - httpApi:
           path: /meetup/join/{id}
           method: put
-          cors: true
   unjoinMeetup:
     handler: functions/unjoinMeetup/index.handler
     events:
       - httpApi:
           path: /meetup/unjoin/{id}
           method: put
-          cors: true
   
 
 resources:
