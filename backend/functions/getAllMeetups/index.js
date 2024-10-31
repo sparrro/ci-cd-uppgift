@@ -10,7 +10,7 @@ exports.handler = async (event) => {
             ProjectionExpression: "meetupName, meetupTime, place, host"
         });
         const result = await db.send(scanCommand);
-        return sendResponse(200, result);
+        return sendResponse(200, result.Items);
     } catch (error) {
         console.error(error);
         return sendError(500, "Server error");
