@@ -20,7 +20,7 @@ createMeetupHandler = async (event) => {
             attendees: [],
             meetupName: name,
             description: desc,
-            time: time,
+            meetupTime: time,
             place: place,
         }
 
