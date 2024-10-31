@@ -1,5 +1,9 @@
 name: Deploy dev
 
+defaults:
+  run:
+    working-directory: ./frontend
+
 on:
   push:
     branches:
@@ -18,14 +22,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install
-        working-directory: ./frontend
         run: npm install
       - name: Build
-        working-directory: ./frontend
         run: npm run build
       - name: Upload dist
         uses: actions/upload-pages-artifact@v1
         with:
-          path: './frontend/dist'
+          path: ./frontend/dist
       - name: Deploy
         uses: actions/deploy-pages@v1
