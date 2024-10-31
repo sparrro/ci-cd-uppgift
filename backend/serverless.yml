@@ -27,54 +27,99 @@ functions:
       - httpApi:
           path: /account/signup
           method: post
+          cors:
+            origin: "*"
+            headers:
+              - Content-Type
+              - Authorization
   logIn:
     handler: functions/logIn/index.handler
     events:
       - httpApi:
           path: /account/login
           method: post
+          cors:
+            origin: "*"
+            headers:
+              - Content-Type
+              - Authorization
   getAccount:
     handler: functions/getAccount/index.handler
     events:
       - httpApi:
           path: /account
           method: get
+          cors:
+            origin: "*"
+            headers:
+              - Content-Type
+              - Authorization
   createMeetup:
     handler: functions/createMeetup/index.handler
     events:
       - httpApi:
           path: /meetup
           method: post
+          cors:
+            origin: "*"
+            headers:
+              - Content-Type
+              - Authorization
   deleteMeetup:
     handler: functions/deleteMeetup/index.handler
     events:
       - httpApi:
           path: /meetup/{id}
           method: delete
+          cors:
+            origin: "*"
+            headers:
+              - Content-Type
+              - Authorization
   getAllMeetups:
     handler: functions/getAllMeetups/index.handler
     events:
       - httpApi:
           path: /meetup
           method: get
+          cors:
+            origin: "*"
+            headers:
+              - Content-Type
+              - Authorization
   getMeetup:
     handler: functions/getMeetup/index.handler
     events:
       - httpApi:
           path: /meetup/{id}
           method: get
+          cors:
+            origin: "*"
+            headers:
+              - Content-Type
+              - Authorization
   joinMeetup:
     handler: functions/joinMeetup/index.handler
     events:
       - httpApi:
           path: /meetup/join/{id}
           method: put
+          cors:
+            origin: "*"
+            headers:
+              - Content-Type
+              - Authorization
   unjoinMeetup:
     handler: functions/unjoinMeetup/index.handler
     events:
       - httpApi:
           path: /meetup/unjoin/{id}
           method: put
+          cors:
+            origin: "*"
+            headers:
+              - Content-Type
+              - Authorization
   
 
 resources:
