@@ -1,1 +1,1 @@
-const base_URL = "https://ikx66f1rza.execute-api.eu-north-1.amazonaws.com"
+//const base_URL = "https://ikx66f1rza.execute-api.eu-north-1.amazonaws.com"
