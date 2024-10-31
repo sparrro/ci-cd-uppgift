@@ -6,12 +6,12 @@ const LeftSide = () => {
 
     const {loggedIn, logIn, logOut} = useLoginStore();
 
-    const handleRegister = () => {
+    const handleRegister = async () => {
         const username = (document.getElementById("username") as HTMLInputElement).value;
         const email = (document.getElementById("email") as HTMLInputElement).value;
         const password = (document.getElementById("password") as HTMLInputElement).value;
 
-        const user = registerUser(username, email, password);
+        const user = await registerUser(username, email, password);
 
         console.log(user);
     }
