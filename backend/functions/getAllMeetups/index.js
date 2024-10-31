@@ -7,7 +7,7 @@ exports.handler = async (event) => {
     try {
         const scanCommand = new ScanCommand({
             TableName: "Meetups",
-            ProjectionExpression: "name, time, place, host"
+            ProjectionExpression: "meetupName, time, place, host"
         });
         const result = await db.send(scanCommand);
         return sendResponse(200, result);
