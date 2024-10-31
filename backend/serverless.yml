@@ -99,7 +99,9 @@ resources:
               - AttributeName: username
                 KeyType: HASH
             Projection:
-              ProjectionType: KEYS_ONLY
+              ProjectionType: INCLUDE
+              NonKeyAttributes:
+                - password
           - IndexName: emailIndex
             KeySchema:
               - AttributeName: email
