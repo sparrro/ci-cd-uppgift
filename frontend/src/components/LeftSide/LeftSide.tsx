@@ -6,6 +6,16 @@ const LeftSide = () => {
 
     const {loggedIn, logIn, logOut} = useLoginStore();
 
+    const handleRegister = () => {
+        const username = (document.getElementById("username") as HTMLInputElement).value;
+        const email = (document.getElementById("email") as HTMLInputElement).value;
+        const password = (document.getElementById("password") as HTMLInputElement).value;
+
+        const user = registerUser(username, email, password);
+
+        console.log(user);
+    }
+
     return (
         <div className="left-side">
             {loggedIn?
@@ -22,7 +32,7 @@ const LeftSide = () => {
                 <label htmlFor="password">Password:</label>
                 <input id="password" type="text" />
                 <button onClick={logIn}>Log in</button>
-                <button >Register</button>
+                <button onClick={handleRegister}>Register</button>
             </>
             }
         </div>
