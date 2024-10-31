@@ -18,20 +18,16 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v4
-      - name: Set up node
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
       - name: Install and build
         working-directory: frontend
         run: |
-          npm install
+          npm ci
           npm run build
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Set up Pages
+        uses: actions/configure-pages@v3
+      - name: Upload dist
+        uses: actions/upload-pages-artifact@v1
         with:
-          github_token: ${{ secrets.TOKEN }}
-          publish_dir: frontend/dist
-          publish_branch: gh-pages
-          user_name: sparrro
-          user_email: hrothi.wulfaz@gmail.com
+          path: "./frontend/dist"
+      - name: Deploy
+        uses: actions/deploy-pages@v1
