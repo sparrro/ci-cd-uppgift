@@ -4,7 +4,7 @@ const middy = require("@middy/core");
 const { authenticate, checkOwnership } = require("../../middlewares");
 const { DeleteCommand } = require("@aws-sdk/lib-dynamodb");
 
-deleteMeetupHandler = async (event) => {
+const deleteMeetupHandler = async (event) => {
     
     const id = event.queryStringParameters["id"];
 

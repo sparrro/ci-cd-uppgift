@@ -5,10 +5,10 @@ const { v4: uuidv4 } = require("uuid");
 const { authenticate } = require("../../middlewares");
 const middy = require("@middy/core");
 
-createMeetupHandler = async (event) => {
+const createMeetupHandler = async (event) => {
     
-    const {name, desc, time, place} = JSON.parse(event.body);
-    if (!name || !desc || !time || !place) return sendError(400, "Meetup name, description, time and place required");
+    const {name, desc, time, place, maxAttendees} = JSON.parse(event.body);
+    if (!name || !desc || !time || !place || !maxAttendees) return sendError(400, "Meetup name, description, time and place required");
 
     try {
 
@@ -18,6 +18,7 @@ createMeetupHandler = async (event) => {
             id: id,
             host: host,
             attendees: [],
+            maxAttendees: maxAttendees,
             meetupName: name,
             description: desc,
             meetupTime: time,
