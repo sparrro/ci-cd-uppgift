@@ -1,19 +1,33 @@
 import "./LeftSide.css";
 import { useLoginStore } from "../../store/login";
 import { registerUser } from "../../api/api";
+import { useState } from "react";
 
 const LeftSide = () => {
 
     const {loggedIn, logIn, logOut} = useLoginStore();
+
+    const [successMessage, setSuccesMessage] = useState('');
+
+    const displayMessage = (message: string) => {
+        setSuccesMessage(message);
+        setTimeout(() => {
+            setSuccesMessage('');
+        }, 10000
+    );
+    }
 
     const handleRegister = async () => {
         const username = (document.getElementById("username") as HTMLInputElement).value;
         const email = (document.getElementById("email") as HTMLInputElement).value;
         const password = (document.getElementById("password") as HTMLInputElement).value;
 
-        const user = await registerUser(username, email, password);
+        const response = await registerUser(username, email, password);
 
-        console.log(user);
+        if (response.success) {
+            displayMessage(`Registered under username ${response.data.username}`)
+        }
+        
     }
 
     return (
@@ -35,6 +49,7 @@ const LeftSide = () => {
                 <button onClick={handleRegister}>Register</button>
             </>
             }
+            <p>{successMessage}</p>
         </div>
     );
 
