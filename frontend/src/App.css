@@ -1,5 +1,11 @@
+body {
+  background-color: rgb(228, 228, 228);
+  padding: 1rem;
+}
+
 #root {
-  max-width: 1280px;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 * {
