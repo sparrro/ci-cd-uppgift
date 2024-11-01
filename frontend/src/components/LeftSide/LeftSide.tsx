@@ -1,6 +1,6 @@
 import "./LeftSide.css";
 import { useLoginStore } from "../../store/login";
-import { registerUser } from "../../api/api";
+import { logInUser, registerUser } from "../../api/api";
 import { useState } from "react";
 
 const LeftSide = () => {
@@ -26,15 +26,36 @@ const LeftSide = () => {
 
         if (response.success) {
             displayMessage(`Registered under username ${response.data.username}`)
-        }
+        } else displayMessage(response.message)
         
+    }
+
+    const handleLogin = async () => {
+        const username = (document.getElementById("username") as HTMLInputElement).value;
+        const email = (document.getElementById("email") as HTMLInputElement).value;
+        const password = (document.getElementById("password") as HTMLInputElement).value;
+
+        const response = await logInUser(password, email, username);
+
+        if (response.success) {
+            displayMessage('Logged in');
+            logIn();
+            localStorage.setItem('token', response.data);
+        } else displayMessage(response.message);
+
+    }
+
+    const handleLogout = () => {
+        logOut();
+        localStorage.removeItem('token');
+        displayMessage('Logged out');
     }
 
     return (
         <div className="left-side">
             {loggedIn?
             <>
-                <button onClick={logOut}>Log out</button>
+                <button onClick={handleLogout}>Log out</button>
                 <button>My account</button>
             </>
             :
@@ -45,7 +66,7 @@ const LeftSide = () => {
                 <input id="username" type="text" />
                 <label htmlFor="password">Password:</label>
                 <input id="password" type="text" />
-                <button onClick={logIn}>Log in</button>
+                <button onClick={handleLogin}>Log in</button>
                 <button onClick={handleRegister}>Register</button>
             </>
             }
