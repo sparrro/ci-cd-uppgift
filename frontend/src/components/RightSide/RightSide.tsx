@@ -24,6 +24,7 @@ const RightSide = () => {
 
     return (
         <div className="right-side">
+            <button onClick={() => setShowOverlay(!showOverlay)}>toggle overlay</button>
             {showOverlay && <MeetupDetails id="1" meetupName="Jedi Training" host="Anakin" meetupTime="2024-11-15" place="Coruscant" desc="We'll be doing some weed" attendees={["Yoda", "Kit Fisto", "Aayla Secura"]} maxattendees={4} />}
             {display}
         </div>
