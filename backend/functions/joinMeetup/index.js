@@ -20,8 +20,8 @@ const joinMeetupHandler = async (event) => {
         });
         const result = await db.send(queryCommand);
         const meetup = result.Items[0];
-        if (meetup.attendees.includes(userId)) return sendResponse(200, "You are already signed up for this meetup");
-        if (meetup.attendees.length>=meetup.maxAttendees) return sendResponse(200, "No attendee slots available");
+        if (meetup.attendees.includes(userId)) return sendResponse(200, {joined: false, message: "You're already signed up for this meetup"});
+        if (meetup.attendees.length>=meetup.maxAttendees) return sendResponse(200, {joined: false, message: "No attendee slots available"});
 
         const updateCommand = new UpdateCommand({
             TableName: "Meetups",
@@ -35,7 +35,7 @@ const joinMeetupHandler = async (event) => {
 
         await db.send(updateCommand);
 
-        return sendResponse(200, "You're in");
+        return sendResponse(200, {joined: true, message: "You're in"});
 
     } catch (error) {
         console.error(error);

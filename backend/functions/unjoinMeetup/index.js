@@ -22,7 +22,7 @@ const unjoinMeetupHandler = async (event) => {
     const meetup = result.Items[0];
 
     if (!meetup.attendees || !meetup.attendees.includes(userId)) {
-      return sendResponse(200, "You are not signed up for this meetup");
+      return sendResponse(200, {unJoined: false, message: "You are not signed up for this meetup"});
     }
 
     const updatedAttendees = meetup.attendees.filter((attendee) => attendee !== userId);
@@ -38,7 +38,7 @@ const unjoinMeetupHandler = async (event) => {
 
     await db.send(updateCommand);
 
-    return sendResponse(200, "You're out");
+    return sendResponse(200, {unjoined: true, message: "You're out"});
 
   } catch (error) {
     console.error(error);

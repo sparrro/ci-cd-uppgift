@@ -1,4 +1,5 @@
 export interface MeetupInterface {
+    id: string;
     host: string;
     meetupName: string;
     desc: string;

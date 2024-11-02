@@ -41,6 +41,7 @@ const LeftSide = () => {
             displayMessage('Logged in');
             logIn();
             localStorage.setItem('token', response.data);
+            localStorage.setItem('user', username);
         } else displayMessage(response.message);
 
     }
@@ -48,6 +49,7 @@ const LeftSide = () => {
     const handleLogout = () => {
         logOut();
         localStorage.removeItem('token');
+        localStorage.removeItem('user');
         displayMessage('Logged out');
     }
 
