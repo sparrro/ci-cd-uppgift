@@ -1,5 +1,5 @@
 .left-side {
-    min-height: 400px;
+    min-height: 25rem;
     width: 45%;
     border-radius: 5px;
     background-color: rgb(132, 156, 121);
@@ -23,8 +23,7 @@
         border-radius: 1rem;
     }
     >button:hover {
-        background-color: rgb(228, 228, 228);
-        color: rgb(34, 34, 34);
+        background-color: rgb(54, 54, 54);
         cursor: pointer;
     }
     >p {
