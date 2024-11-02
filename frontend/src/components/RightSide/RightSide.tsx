@@ -4,19 +4,28 @@ import Meetup from "../Meetup/Meetup";
 import { useDisplayStore } from "../../store/display";
 import { useEffect, useState } from "react";
 import { MeetupInterface, sortByDate } from "../../interfaces/Meetup";
-import { MeetupDetails } from "../MeetupDetails/MeetupDetails";
 
 const RightSide = () => {
 
     const {display, swapDisplay} = useDisplayStore();
 
-    const [showOverlay, setShowOverlay] = useState(true);
+    const [showOverlay, setShowOverlay] = useState(false);
+
+    const [overlayContent, setOverlayContent] = useState(null);
+
+    const overlayContenter = (content: any) => {
+        setOverlayContent(content)
+    }
+
+    const overlayToggler = () => {
+        setShowOverlay(!showOverlay);
+    }
     
     const renderInitial = async () => {
         const data = await getAllMeetups();
         let meetups = data.data;
         meetups = sortByDate(meetups);
-        swapDisplay(meetups.map((meetup: MeetupInterface) => <Meetup {...meetup} key={meetup.id} />))
+        swapDisplay(meetups.map((meetup: MeetupInterface) => <Meetup {...meetup} overlayToggler={overlayToggler} overlayContenter={overlayContenter} key={meetup.id} />))
     }
     useEffect(() => {
         renderInitial();
@@ -25,7 +34,7 @@ const RightSide = () => {
     return (
         <div className="right-side">
             <button onClick={() => setShowOverlay(!showOverlay)}>toggle overlay</button>
-            {showOverlay && <MeetupDetails id="1" meetupName="Jedi Training" host="Anakin" meetupTime="2024-11-15" place="Coruscant" desc="We'll be doing some weed" attendees={["Yoda", "Kit Fisto", "Aayla Secura"]} maxattendees={4} />}
+            {showOverlay && overlayContent}
             {display}
         </div>
     );

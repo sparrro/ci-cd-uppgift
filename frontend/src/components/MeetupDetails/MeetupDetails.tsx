@@ -4,7 +4,7 @@ import { MeetupInterface } from "../../interfaces/Meetup";
 import "./MeetupDetails.css";
 
 export const MeetupDetails = ({id, meetupName, host, meetupTime, place, attendees, maxattendees, desc}: MeetupInterface) => {
-    
+
     const [registrationMessage, setRegistrationMessage] = useState('');
 
     const [isRegistered, setIsRegistered] = useState(false);
@@ -46,7 +46,7 @@ export const MeetupDetails = ({id, meetupName, host, meetupTime, place, attendee
         if (user && token) {
             const response = await unRegisterToMeetup(id, token);
             if (response.data.unJoined) {
-                setLocalAttendees(attendees.filter(attendee => attendee != user))
+                setLocalAttendees(localAttendees.filter(attendee => attendee != user))
                 setIsRegistered(false);
                 displayRegMess(response.data.message);
             } else displayRegMess(response.data.message);
@@ -60,7 +60,7 @@ export const MeetupDetails = ({id, meetupName, host, meetupTime, place, attendee
             <p><strong>When:</strong> {meetupTime}</p>
             <p><strong>Where:</strong> {place}</p>
             <p><strong>Host:</strong> {host}</p>
-            <p><strong>Attendees:</strong> {attendees.length}/{maxattendees}</p>
+            <p><strong>Attendees:</strong> {localAttendees.length}/{maxattendees}</p>
             {isRegistered?
             <button onClick={() => handleUnRegister(id)}>Leave</button>:
             <button onClick={() => handleRegisterAttendance(id)}>Join</button>}
