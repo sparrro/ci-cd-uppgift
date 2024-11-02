@@ -4,9 +4,9 @@ const { authenticate } = require("../../middlewares");
 const { QueryCommand } = require("@aws-sdk/lib-dynamodb");
 const middy = require("@middy/core");
 
-const getAccountHandler = async (event) => {
+export const handler = async (event) => {
 
-    const id = event.user;
+    const id = event.queryStringParameters["id"];
 
     try {
 
@@ -27,5 +27,3 @@ const getAccountHandler = async (event) => {
     }
 
 }
-
-exports.handler = middy(getAccountHandler).use(authenticate);
