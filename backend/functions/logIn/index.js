@@ -28,12 +28,11 @@ exports.handler = async (event) => {
             const passwordMatches = await checkPassword(password, user.password);
             if (!passwordMatches) return sendError(400, "Incorrect login credentials");
 
-            const token = giveToken(user.id);
+            const token = giveToken(user.username);
             return sendResponse(200, token);
         } else {
             const queryCommand = new QueryCommand({
                 TableName: "Users",
-                IndexName: "usernameIndex",
                 KeyConditionExpression: "username = :username",
                 ExpressionAttributeValues: {
                     ":username": username,
@@ -46,7 +45,7 @@ exports.handler = async (event) => {
             const passwordMatches = await checkPassword(password, user.password);
             if (!passwordMatches) return sendError(400, "Incorrect login credentials");
 
-            const token = giveToken(user.id);
+            const token = giveToken(user.username);
             return sendResponse(200, token)
         }
 

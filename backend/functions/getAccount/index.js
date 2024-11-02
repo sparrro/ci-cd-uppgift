@@ -6,15 +6,15 @@ const middy = require("@middy/core");
 
 export const handler = async (event) => {
 
-    const id = event.queryStringParameters["id"];
+    const id = event.queryStringParameters["username"];
 
     try {
 
         const queryCommand = new QueryCommand({
             TableName: "Users",
-            KeyConditionExpression: "id = :id",
+            KeyConditionExpression: "username = :username",
             ExpressionAttributeValues: {
-                ":id": id,
+                ":username": username,
             },
         });
         const result = await db.send(queryCommand);

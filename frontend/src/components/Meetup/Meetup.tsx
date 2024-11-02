@@ -2,8 +2,6 @@ import "./Meetup.css";
 
 const Meetup = ({name, host, time, place}: {name: string, host: string, time: string, place: string}) => {
 
-
-
     return (
         <div className="meetup-item">
             <h3>{name}</h3>

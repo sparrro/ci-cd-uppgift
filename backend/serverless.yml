@@ -86,24 +86,14 @@ resources:
       Properties:
         TableName: Users
         AttributeDefinitions:
-          - AttributeName: "id"
-            AttributeType: "S"
           - AttributeName: "username"
             AttributeType: "S"
           - AttributeName: "email"
             AttributeType: "S"
         KeySchema:
-          - AttributeName: "id"
+          - AttributeName: "username"
             KeyType: "HASH"
         GlobalSecondaryIndexes:
-          - IndexName: usernameIndex
-            KeySchema:
-              - AttributeName: username
-                KeyType: HASH
-            Projection:
-              ProjectionType: INCLUDE
-              NonKeyAttributes:
-                - password
           - IndexName: emailIndex
             KeySchema:
               - AttributeName: email

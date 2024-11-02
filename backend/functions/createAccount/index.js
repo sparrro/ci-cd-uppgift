@@ -15,7 +15,6 @@ exports.handler = async (event) => {
 
         const usernameQueryComm = new QueryCommand({
             TableName: "Users",
-            IndexName: "usernameIndex",
             KeyConditionExpression: "username = :username",
             ExpressionAttributeValues: {
                 ":username": username,
@@ -36,9 +35,7 @@ exports.handler = async (event) => {
         if (usernameResult.Items.length>0 || emailResult.Items.length>0) return sendError(409, "Email or username already in use");
 
         const hashedPassword = await hashPassword(password);
-        const id = uuidv4();
         const user = {
-            id: id,
             username: username,
             email: email,
             password: hashedPassword,

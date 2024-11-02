@@ -36,3 +36,12 @@ export const getAllMeetups = async () => {
     const data = await response.json();
     return data; 
 }
+
+export const getAccount = async (id: string) => {
+    const response = await fetch(`${base_URL}/meetup/?id=${id}`, {
+        method: 'get',
+        headers: { "Content-Type": "application/json"}
+    });
+    const data = await response.json();
+    return data;
+}
