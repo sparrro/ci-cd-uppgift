@@ -42,10 +42,10 @@ const LeftSide = () => {
         const response = await logInUser(password, email, username);
 
         if (response.success) {
-            displayMessage('Logged in');
             logIn();
             sessionStorage.setItem('token', response.data);
             sessionStorage.setItem('user', username);
+            displayMessage(`Logged in as ${username}`)
         } else displayMessage(response.message);
 
     }
@@ -98,7 +98,7 @@ const LeftSide = () => {
                 <label htmlFor="username">Username:</label>
                 <input id="username" type="text" />
                 <label htmlFor="password">Password:</label>
-                <input id="password" type="text" />
+                <input id="password" type="password" />
                 <button onClick={handleLogin}>Log in</button>
                 <button onClick={handleRegister}>Register</button>
             </>
