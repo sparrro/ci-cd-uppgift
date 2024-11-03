@@ -33,7 +33,6 @@ const RightSide = () => {
 
     return (
         <div className="right-side">
-            <button onClick={() => setShowOverlay(!showOverlay)}>toggle overlay</button>
             {showOverlay && overlayContent}
             {display}
         </div>

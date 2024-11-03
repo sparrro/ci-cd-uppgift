@@ -6,7 +6,7 @@ export interface MeetupInterface {
     meetupTime: string;
     place: string;
     attendees: string[];
-    maxattendees: number;
+    maxAttendees: number;
     overlayToggler: () => void;
     overlayContenter: (content: any) => void;
 }

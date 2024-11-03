@@ -21,8 +21,10 @@ const unjoinMeetupHandler = async (event) => {
     const result = await db.send(queryCommand);
     const meetup = result.Items[0];
 
-    if (!meetup.attendees || !meetup.attendees.includes(userId)) {
-      return sendResponse(200, {unJoined: false, message: "You are not signed up for this meetup"});
+    if (!meetup) return sendError(404, "Meetup not found");
+
+    if (!meetup.attendees.includes(userId)) {
+      return sendResponse(200, {unjoined: false, message: "You are not signed up for this meetup"});
     }
 
     const updatedAttendees = meetup.attendees.filter((attendee) => attendee !== userId);

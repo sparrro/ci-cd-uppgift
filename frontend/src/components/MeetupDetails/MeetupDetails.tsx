@@ -1,70 +1,75 @@
-import { useEffect, useState } from "react";
 import { registerToMeetup, unRegisterToMeetup } from "../../api/api";
+import { useEffect, useState } from "react";
 import { MeetupInterface } from "../../interfaces/Meetup";
 import "./MeetupDetails.css";
+import { getMeetup } from "../../api/api";
 
-export const MeetupDetails = ({id, meetupName, host, meetupTime, place, attendees, maxattendees, desc}: MeetupInterface) => {
+export const MeetupDetails = ({id, overlayToggler, overlayContenter}: MeetupInterface) => {
 
-    const [registrationMessage, setRegistrationMessage] = useState('');
+    const [meetup, setMeetup] = useState({
+        meetupName: '',
+        description: '',
+        meetupTime: '',
+        place: '',
+        host: '',
+        attendees: [''],
+        maxAttendees: 0
+    });
 
-    const [isRegistered, setIsRegistered] = useState(false);
+    const [message, setMessage] = useState('');
 
-    const [localAttendees, setLocalAttendees] = useState(attendees);
+    const fetchMeetup = async () => {
+        const data = await getMeetup(id);
+        setMeetup(data.data);
+    }
 
     useEffect(() => {
-        const user = localStorage.getItem('user');
-        if (user && attendees.includes(user)) {
-            if (attendees.includes(localStorage.user)) setIsRegistered(true);
-        }
+        fetchMeetup();
     }, []);
 
-    const displayRegMess = (message: string) => {
-        setRegistrationMessage(message);
-        setTimeout(() => {
-            setRegistrationMessage('');
-        }, 10000);
+    const handleJoin = async () => {
+        const token = localStorage.getItem('token');
+        const user = localStorage.getItem('user');
+        if (token && user) {
+            const data = await registerToMeetup(id, token);
+            if (data.data.joined) {
+                setMeetup({...meetup, attendees: [...meetup.attendees, user]})
+                setMessage(data.data.message);
+            } else {
+                setMessage(data.data.message);
+            }
+        }
     }
 
-    const handleRegisterAttendance = async (id: string) => {
-        const user = localStorage.user;
-        const token = localStorage.token;
-
-        if (user && token) {
-            const response = await registerToMeetup(id, token);
-            if (response.data.joined) {
-                setLocalAttendees([...localAttendees, user]);
-                setIsRegistered(true);
-                displayRegMess(response.data.message);
-            } else displayRegMess(`${response.data.message}`);
-        } else displayRegMess("You're not logged in");
-    }
-    
-    const handleUnRegister = async (id: string) => {
-        const user = localStorage.user;
-        const token = localStorage.token;
-
-        if (user && token) {
-            const response = await unRegisterToMeetup(id, token);
-            if (response.data.unJoined) {
-                setLocalAttendees(localAttendees.filter(attendee => attendee != user))
-                setIsRegistered(false);
-                displayRegMess(response.data.message);
-            } else displayRegMess(response.data.message);
-        } else displayRegMess("You're not logged in");
+    const handleLeave = async () => {
+        const token = localStorage.getItem('token');
+        const user = localStorage.getItem('user');
+        if (token && user) {
+            const data = await unRegisterToMeetup(id, token);
+            if (data.data.unjoined) {
+                setMeetup(prevMeetup => ({
+                    ...prevMeetup,
+                    attendees: prevMeetup.attendees.filter(attendee => attendee != user)
+                }));
+                setMessage(data.data.message);
+            } else {
+                setMessage(data.data.message);
+            }
+        }
     }
 
     return (
         <div className="meetup-details">
-            <h2>{meetupName}</h2>
-            <p>{desc}</p>
-            <p><strong>When:</strong> {meetupTime}</p>
-            <p><strong>Where:</strong> {place}</p>
-            <p><strong>Host:</strong> {host}</p>
-            <p><strong>Attendees:</strong> {localAttendees.length}/{maxattendees}</p>
-            {isRegistered?
-            <button onClick={() => handleUnRegister(id)}>Leave</button>:
-            <button onClick={() => handleRegisterAttendance(id)}>Join</button>}
-            <p>{registrationMessage}</p>
+            <button onClick={() => {overlayContenter(null); overlayToggler();}} >X</button>
+            <h2>{meetup.meetupName}</h2>
+            <p>{meetup.description}</p>
+            <p><strong>When:</strong> {meetup.meetupTime}</p>
+            <p><strong>Where:</strong> {meetup.place}</p>
+            <p><strong>Host:</strong> {meetup.host}</p>
+            <p><strong>Attendees:</strong> {meetup.attendees.length}/{meetup.maxAttendees}</p>
+            <button onClick={handleJoin}>Join</button>
+            <button onClick={handleLeave}>Leave</button>
+            <p>{message}</p>
         </div>
     )
 }

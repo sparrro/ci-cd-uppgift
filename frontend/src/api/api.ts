@@ -69,3 +69,14 @@ export const unRegisterToMeetup = async (id: string, token: string) => {
     const data = await response.json();
     return data;
 }
+
+export const getMeetup = async (id: string) => {
+    const response = await fetch(`${base_URL}/meetup/?id=${id}`, {
+        method: 'get',
+        headers: {
+            "Content-Type": 'application/json',
+        },
+    });
+    const data = await response.json();
+    return data;
+}
