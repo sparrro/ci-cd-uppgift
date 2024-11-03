@@ -83,6 +83,13 @@ const LeftSide = () => {
         }
     }
 
+    const handleAllMeetups = async () => {
+        const data = await getAllMeetups();
+        let meetups = data.data;
+        meetups = sortByDate(meetups);
+        swapDisplay(meetups.map((meetup: MeetupInterface) => <Meetup {...meetup} overlayToggler={toggleOverlay} overlayContenter={swapOverlayContent} key={meetup.id} />))
+    }
+
     return (
         <div className="left-side">
             <h2>Account & Search</h2>
@@ -104,8 +111,10 @@ const LeftSide = () => {
             </>
             }
             <p>{successMessage}</p>
+            <label htmlFor="search">Search:</label>
             <input type="text" id="search" />
             <button onClick={handleSearch}>Search</button>
+            <button onClick={handleAllMeetups}>All meetups</button>
         </div>
     );
 
