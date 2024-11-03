@@ -2,7 +2,7 @@ export interface MeetupInterface {
     id: string;
     host: string;
     meetupName: string;
-    desc: string;
+    description: string;
     meetupTime: string;
     place: string;
     attendees: string[];

@@ -1,5 +1,5 @@
 .left-side {
-    min-height: 25rem;
+    margin: 1rem auto 2rem auto;
     width: 45%;
     border-radius: 5px;
     background-color: rgb(132, 156, 121);
@@ -7,9 +7,11 @@
     grid-gap: 10px;
     padding: 10px;
     grid-template-columns: repeat(2, 45%);
-    grid-template-rows: repeat(6, 2rem);
     >* {
         margin: auto;
+    }
+    >h2 {
+        grid-column: span 2;
     }
     >label {
         line-height: 2rem;

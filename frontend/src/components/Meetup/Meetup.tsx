@@ -2,12 +2,12 @@ import { MeetupInterface } from "../../interfaces/Meetup";
 import { MeetupDetails } from "../MeetupDetails/MeetupDetails";
 import "./Meetup.css";
 
-const Meetup = ({id, meetupName, desc, host, meetupTime, place, attendees, maxAttendees, overlayToggler, overlayContenter}: MeetupInterface) => {
+const Meetup = ({id, meetupName, description, host, meetupTime, place, attendees, maxAttendees, overlayToggler, overlayContenter}: MeetupInterface) => {
 
     const handleDetails = () => {
 
         overlayToggler();
-        overlayContenter(<MeetupDetails id={id} meetupName={meetupName} host={host} meetupTime={meetupTime} place={place} attendees={attendees} maxAttendees={maxAttendees} desc={desc} overlayContenter={overlayContenter} overlayToggler={overlayToggler} />);
+        overlayContenter(<MeetupDetails id={id} meetupName={meetupName} description={description} host={host} meetupTime={meetupTime} place={place} attendees={attendees} maxAttendees={maxAttendees}  overlayContenter={overlayContenter} overlayToggler={overlayToggler} />);
     }
 
     return (

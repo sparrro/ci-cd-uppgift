@@ -3,11 +3,6 @@ body {
   padding: 1rem;
 }
 
-#root {
-  display: flex;
-  justify-content: space-evenly;
-}
-
 * {
   box-sizing: border-box;
   margin: 0;
