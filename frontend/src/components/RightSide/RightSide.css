@@ -1,6 +1,10 @@
 .right-side {
-    min-height: 400px;
+    height: 25rem;
+    margin: 1rem auto 1rem auto;
+    padding: 1rem;
     width: 45%;
     border-radius: 5px;
     background-color: rgb(132, 156, 121);
+    overflow: auto;
+    position: relative;
 }

@@ -4,17 +4,17 @@ const { authenticate } = require("../../middlewares");
 const { QueryCommand } = require("@aws-sdk/lib-dynamodb");
 const middy = require("@middy/core");
 
-const getAccountHandler = async (event) => {
+export const handler = async (event) => {
 
-    const id = event.user;
+    const id = event.queryStringParameters["username"];
 
     try {
 
         const queryCommand = new QueryCommand({
             TableName: "Users",
-            KeyConditionExpression: "id = :id",
+            KeyConditionExpression: "username = :username",
             ExpressionAttributeValues: {
-                ":id": id,
+                ":username": username,
             },
         });
         const result = await db.send(queryCommand);
@@ -27,5 +27,3 @@ const getAccountHandler = async (event) => {
     }
 
 }
-
-exports.handler = middy(getAccountHandler).use(authenticate);
